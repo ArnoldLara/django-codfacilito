@@ -9,11 +9,28 @@
      <div class="container">
        <div class="row">
          <div class="col">
+           <!-- Este es un comentario de HTML -->
+           {#Este es un comentario de DJANGO, mejor usar este#}
            <h1>{{ message }}</h1>
+           <ul class="list-group">
+             {%for product in products%}
+                <li class="list-group-item">{{product.title}}
+
+                    {%if product.stock%}
+                      <span class="text-success">Disponible</span>
+                    {%else%}
+                      <span class="text-danger">No disponible</span>
+
+                    {%endif%}
+
+                </li>
+             {%endfor%}
+           </ul>
+
+
+
          </div>
-
        </div>
-
      </div>
 
    </body>

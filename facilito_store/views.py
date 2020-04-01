@@ -11,7 +11,14 @@ def index(request):
         #Contexto
         #Se puede pasar valores de la vista al template, para generar paginas
         #web dinamicas
-        'message':'Nuevo mensaje desde la vista',
-        'title':'titulo'
+        'message':'Listado de productos',
+        'title':'Productos',
+        #Listado de productos, es una lista que contiene diccionarios por cada producto
+        'products':[
+            {'title':'Playera','precio':5,'stock':True},
+            {'title':'Camisa','precio':7,'stock':True},
+            {'title':'Mochila','precio':20,'stock':False},
+            {'title':'Laptop','precio':200,'stock':False},
+        ],
     })
     #return HttpResponse('Hola, el texto ha cambiado!')
