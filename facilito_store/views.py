@@ -9,5 +9,9 @@ def index(request):
 
     return render(request,'index.html',{
         #Contexto
+        #Se puede pasar valores de la vista al template, para generar paginas
+        #web dinamicas
+        'message':'Nuevo mensaje desde la vista',
+        'title':'titulo'
     })
     #return HttpResponse('Hola, el texto ha cambiado!')
