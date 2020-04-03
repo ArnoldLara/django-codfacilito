@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+#Libreria que nos sirve para autenticar usuarios en nuestro sitio web
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 
 #Funcion que recibira la peticion y retornara una respuesta http
 def index(request):
@@ -24,7 +26,8 @@ def index(request):
     })
     #return HttpResponse('Hola, el texto ha cambiado!')
 
-def login(request):
+#Se tuvo que renombrar la funcion porque se importo una del mismo nombre de DJango
+def login_view(request):
     #Indica que tipo de request que se hizo y se imprime en consola
     print(request.method)
     if request.method == 'POST':
@@ -36,7 +39,12 @@ def login(request):
         print(username)
         print(password)
 
-
+        user = authenticate(username=username,password=password)#Retorna none si no existe usuario
+        if user:
+            login(request,user)
+            print("Usuario autenticado")
+        else:
+            print("Usuario no autenticado")
 
     return render(request,'users/login.html',{
 
