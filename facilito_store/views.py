@@ -1,4 +1,7 @@
 from django.shortcuts import render
+#Se importa la funcion redirect para redirigir la sesion del usuario a un template
+from django.shortcuts import redirect
+
 from django.http import HttpResponse
 #Libreria que nos sirve para autenticar usuarios en nuestro sitio web
 from django.contrib.auth import authenticate
@@ -36,13 +39,12 @@ def login_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        print(username)
-        print(password)
-
         user = authenticate(username=username,password=password)#Retorna none si no existe usuario
         if user:
             login(request,user)
-            print("Usuario autenticado")
+            #Redirige a la pagina de home
+            return redirect('index')
+
         else:
             print("Usuario no autenticado")
 
