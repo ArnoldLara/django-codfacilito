@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+            <h2>Login</h2>
+
+            {#Formulario#}
+            {#La info la va a enviar por el metodo post y la va a enviar por la misma URL#}
+            <form method="post">
+              {#Esto se debe colocar en todos los formularios para evitar ataques, obligatorio#}
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" value="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" value="form-control">
+              </div>
+              {#Se estan usanod clases de bootstrap para que se agilice el maquetado#}
+              <button type="submit" name="btn btn-primary">Login</button>
+
+            </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

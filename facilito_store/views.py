@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
 #Funcion que recibira la peticion y retornara una respuesta http
 def index(request):
     #Se retorna un pagina renderizada, con la funcion render
@@ -22,3 +23,21 @@ def index(request):
         ],
     })
     #return HttpResponse('Hola, el texto ha cambiado!')
+
+def login(request):
+    #Indica que tipo de request que se hizo y se imprime en consola
+    print(request.method)
+    if request.method == 'POST':
+        #Los atributos que devuelve el metodo POST los devuelve en un diccionario
+        #Asi que se pueden consultar con el metodo get pasando la llave primeria
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        print(username)
+        print(password)
+
+
+
+    return render(request,'users/login.html',{
+
+    })
