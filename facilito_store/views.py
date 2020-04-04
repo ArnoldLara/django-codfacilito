@@ -11,6 +11,8 @@ from django.contrib import messages
 
 from .forms import RegisterForm
 
+from django.contrib.auth.models import User
+
 #Funcion que recibira la peticion y retornara una respuesta http
 def index(request):
     #Se retorna un pagina renderizada, con la funcion render
@@ -72,9 +74,11 @@ def registro(request):
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
 
-        print(username)
-        print(email)
-        print(password)
+        user = User.objects.create_user(username,email,password)
+        if user:
+            login(request,user)
+            messages.success(request,'Usuario creado exitosamente')
+            return redirect('index')
 
     return render(request,'users/register.html',{
         'form':form
