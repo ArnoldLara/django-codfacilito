@@ -69,12 +69,8 @@ def registro(request):
     form = RegisterForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        #Se obtienen lso datos con el metodo cleaned data que actua como un diccionario
-        username = form.cleaned_data.get('username')
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
-
-        user = User.objects.create_user(username,email,password)
+        #Se obtienen los datos con el metodo cleaned data que actua como un diccionario
+        user = form.save()
         if user:
             login(request,user)
             messages.success(request,'Usuario creado exitosamente')
