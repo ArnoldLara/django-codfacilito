@@ -23,6 +23,11 @@ class RegisterForm(forms.Form):
                                 widget=forms.PasswordInput(attrs={
                                     'class': 'form-control',
                                 }))
+    password2 = forms.CharField(label='Confirmar password',
+                                required=True,
+                                widget=forms.PasswordInput(attrs={
+                                    'class': 'form-control',
+                                }))
 
     #Importante que la funcion se llame asi para que DJANGO sepa que vamos
     #a hacer una validacion sobre el campo Username
@@ -41,3 +46,11 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('El email ya esta en uso')
 
         return email
+
+    #Se usa el metodo clean cada vez que necesitemos validar 2 campos que uno dependa
+    #del control
+    def clean(self):
+        cleaned_data = super().clean()
+
+        if cleaned_data.get('password2') !=cleaned_data.get('password'):
+            self.add_error('password2','El password no coincide')
