@@ -10,4 +10,6 @@ urlpatterns = [
         #String de la url, la funcion a asociar y un nombre
     path('',views.index, name='index'),
     path('usuarios/login', views.login_view,name='login'),
+    path('usuarios/logout', views.logout_view,name='logout'),
+
 ]

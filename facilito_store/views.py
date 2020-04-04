@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 #Libreria que nos sirve para autenticar usuarios en nuestro sitio web
 from django.contrib.auth import authenticate
+from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib import messages
 
@@ -54,3 +55,8 @@ def login_view(request):
     return render(request,'users/login.html',{
 
     })
+
+def logout_view(request):
+    logout(request)
+    messages.success(request,'Sesion cerrada correctamente.')
+    return redirect('login')
