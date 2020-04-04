@@ -6,6 +6,7 @@ from django.http import HttpResponse
 #Libreria que nos sirve para autenticar usuarios en nuestro sitio web
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib import messages
 
 #Funcion que recibira la peticion y retornara una respuesta http
 def index(request):
@@ -42,10 +43,12 @@ def login_view(request):
         user = authenticate(username=username,password=password)#Retorna none si no existe usuario
         if user:
             login(request,user)
+            messages.success(request,'Bienvenido {}'.format(user.username))
             #Redirige a la pagina de home
             return redirect('index')
 
         else:
+            messages.success(request,'Usuario o contraseñas no validos')
             print("Usuario no autenticado")
 
     return render(request,'users/login.html',{
