@@ -1,6 +1,8 @@
 #Este archivo nos permite crear formulario a partir de clases
 from django import forms
 
+from django.contrib.auth.models import User
+
 #La clase debe de heredar de Forms
 class RegisterForm(forms.Form):
     username = forms.CharField(required=True,
@@ -21,3 +23,21 @@ class RegisterForm(forms.Form):
                                 widget=forms.PasswordInput(attrs={
                                     'class': 'form-control',
                                 }))
+
+    #Importante que la funcion se llame asi para que DJANGO sepa que vamos
+    #a hacer una validacion sobre el campo Username
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('El nombre de usuario ya esta en uso')
+
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('El email ya esta en uso')
+
+        return email

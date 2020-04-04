@@ -38,6 +38,9 @@
                 <div class="form-goup">
                   {{field.label_tag}}
                   {{field}}
+                  {% if field.errors %}
+                    {{ field.errors }}
+                  {% endif %}
                 </div>
 
               {% endfor %}
