@@ -9,6 +9,8 @@ from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib import messages
 
+from .forms import RegisterForm
+
 #Funcion que recibira la peticion y retornara una respuesta http
 def index(request):
     #Se retorna un pagina renderizada, con la funcion render
@@ -60,3 +62,9 @@ def logout_view(request):
     logout(request)
     messages.success(request,'Sesion cerrada correctamente.')
     return redirect('login')
+
+def registro(request):
+    form = RegisterForm()
+    return render(request,'users/register.html',{
+        'form':form
+    })
