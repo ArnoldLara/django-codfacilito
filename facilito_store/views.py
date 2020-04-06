@@ -39,6 +39,10 @@ def index(request):
 def login_view(request):
     #Indica que tipo de request que se hizo y se imprime en consola
     print(request.method)
+
+    if request.user.is_authenticated:
+        return redirect('index')
+
     if request.method == 'POST':
         #Los atributos que devuelve el metodo POST los devuelve en un diccionario
         #Asi que se pueden consultar con el metodo get pasando la llave primeria
@@ -66,6 +70,10 @@ def logout_view(request):
     return redirect('login')
 
 def registro(request):
+
+    if request.user.is_authenticated:
+        return redirect('index')
+
     form = RegisterForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
