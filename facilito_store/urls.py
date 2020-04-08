@@ -6,6 +6,9 @@ from . import views
 #Se importa la clase que se va a usar
 from products.views import ProductListView
 
+#Para incluir URL de otra aplicacion
+from django.urls import include
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -15,5 +18,6 @@ urlpatterns = [
     path('usuarios/login', views.login_view,name='login'),
     path('usuarios/logout', views.logout_view,name='logout'),
     path('usuarios/registro', views.registro,name='registro'),
+    path('productos/', include('products.urls'))
 
 ]
