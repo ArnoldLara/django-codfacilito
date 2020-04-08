@@ -20,7 +20,7 @@ from products.models import Product
 def index(request):
 
     #Con el metodo objects.all() se obtiene toda la tabla de productos
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-id')
 
     return render(request,'index.html',{
         #Contexto
